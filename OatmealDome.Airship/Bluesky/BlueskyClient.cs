@@ -1,4 +1,6 @@
 using OatmealDome.Airship.ATProtocol;
+using OatmealDome.Airship.ATProtocol.Repo;
+using OatmealDome.Airship.Bluesky.Feed;
 
 namespace OatmealDome.Airship.Bluesky;
 
@@ -21,4 +23,15 @@ public sealed class BlueskyClient : ATClient
     public BlueskyClient() : base(BaseUrl)
     {
     }
+    
+    //
+    // Post
+    //
+    
+    public async Task<CreateRecordResponse> Post_Create(Post post)
+    {
+        VerifyCredentials();
+        
+        return await Repo_CreateRecord(Credentials!.Did, "app.bsky.feed.post", post);
+    } 
 }
