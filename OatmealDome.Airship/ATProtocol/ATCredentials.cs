@@ -27,4 +27,12 @@ public sealed class ATCredentials
         get;
         set;
     }
+
+    internal ATCredentials(CreateAccountResponse accountResponse)
+    {
+        AccessJwt = accountResponse.AccessJwt;
+        RefreshJwt = accountResponse.RefreshJwt;
+        Handle = accountResponse.Handle;
+        Did = accountResponse.Did;
+    }
 }

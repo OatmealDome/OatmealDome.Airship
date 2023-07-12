@@ -117,4 +117,28 @@ public class ATClient
 
         return JsonSerializer.Deserialize<T>(json)!;
     }
+    
+    //
+    // Server
+    //
+
+    public async Task<ATCredentials> Server_CreateAccount(string email, string handle, string password,
+        string? inviteCode = null, string? recoveryKey = null)
+    {
+        CreateAccountRequest request = new CreateAccountRequest()
+        {
+            Email = email,
+            Handle = handle,
+            Password = password,
+            InviteCode = inviteCode ?? Optional<string>.None,
+            RecoveryKey = recoveryKey ?? Optional<string>.None
+        };
+        
+        CreateAccountResponse response =
+            await SendRequestWithJsonResponse<CreateAccountResponse>(request, ATAuthenticationType.None);
+
+        Credentials = new ATCredentials(response);
+
+        return Credentials;
+    }
 }
