@@ -168,4 +168,9 @@ public class ATClient
 
         return Credentials;
     }
+
+    public async Task Server_DeleteSession()
+    {
+        await SendRequest(new DeleteSessionRequest(), ATAuthenticationType.Refresh);
+    }
 }
