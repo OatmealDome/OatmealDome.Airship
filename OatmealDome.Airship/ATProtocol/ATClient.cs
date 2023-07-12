@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using DotNext;
 using OatmealDome.Airship.ATProtocol.Lexicon.Request;
+using OatmealDome.Airship.ATProtocol.Repo;
 using OatmealDome.Airship.ATProtocol.Response;
 using OatmealDome.Airship.ATProtocol.Server;
 
@@ -172,5 +173,28 @@ public class ATClient
     public async Task Server_DeleteSession()
     {
         await SendRequest(new DeleteSessionRequest(), ATAuthenticationType.Refresh);
+    }
+    
+    //
+    // Repo
+    //
+
+    public async Task<CreateRecordResponse> Repo_CreateRecord<T>(string repo, string collection, T record,
+        string? recordKey = null, bool? validate = null, string? swapCommit = null) where T : ATRecord
+    {
+        CreateRecordRequest<T> request = new CreateRecordRequest<T>()
+        {
+            Repo = repo,
+            Collection = collection,
+            Record = record,
+            RecordKey = recordKey ?? Optional<string>.None,
+            Validate = validate ?? true,
+            SwapCommit = swapCommit ?? Optional<string>.None
+        };
+
+        CreateRecordResponse response =
+            await SendRequestWithJsonResponse<CreateRecordResponse>(request, ATAuthenticationType.Bearer);
+
+        return response;
     }
 }
