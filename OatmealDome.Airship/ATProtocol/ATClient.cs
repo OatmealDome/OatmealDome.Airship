@@ -118,6 +118,14 @@ public class ATClient
 
         return JsonSerializer.Deserialize<T>(json)!;
     }
+
+    protected void VerifyCredentials()
+    {
+        if (Credentials == null)
+        {
+            throw new ATException("Must authenticate to use this API");
+        }
+    }
     
     //
     // Server
