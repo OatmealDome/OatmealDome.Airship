@@ -157,4 +157,15 @@ public class ATClient
 
         return Credentials;
     }
+
+    public async Task<ATCredentials> Server_RefreshSession()
+    {
+        RefreshSessionResponse response =
+            await SendRequestWithJsonResponse<RefreshSessionResponse>(new RefreshSessionRequest(),
+                ATAuthenticationType.Refresh);
+
+        Credentials = new ATCredentials(response);
+
+        return Credentials;
+    }
 }
