@@ -141,4 +141,20 @@ public class ATClient
 
         return Credentials;
     }
+
+    public async Task<ATCredentials> Server_CreateSession(string identifier, string password)
+    {
+        CreateSessionRequest request = new CreateSessionRequest()
+        {
+            Identifier = identifier,
+            Password = password
+        };
+        
+        CreateSessionResponse response =
+            await SendRequestWithJsonResponse<CreateSessionResponse>(request, ATAuthenticationType.None);
+
+        Credentials = new ATCredentials(response);
+
+        return Credentials;
+    }
 }

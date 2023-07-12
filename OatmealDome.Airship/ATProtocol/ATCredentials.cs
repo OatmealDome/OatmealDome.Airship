@@ -35,4 +35,12 @@ public sealed class ATCredentials
         Handle = accountResponse.Handle;
         Did = accountResponse.Did;
     }
+    
+    internal ATCredentials(CreateSessionResponse sessionResponse)
+    {
+        AccessJwt = sessionResponse.AccessJwt;
+        RefreshJwt = sessionResponse.RefreshJwt;
+        Handle = sessionResponse.Handle;
+        Did = sessionResponse.Did;
+    }
 }
