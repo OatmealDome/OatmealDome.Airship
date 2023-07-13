@@ -28,6 +28,11 @@ public sealed class ATCredentials
         set;
     }
 
+    public ATCredentials()
+    {
+        //
+    }
+
     internal ATCredentials(CreateAccountResponse accountResponse)
     {
         AccessJwt = accountResponse.AccessJwt;
