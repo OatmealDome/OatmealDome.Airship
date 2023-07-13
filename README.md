@@ -56,3 +56,28 @@ Media files must be uploaded to the server before they can be used. At the time 
 ```csharp
 GenericBlob blob = await client.Repo_CreateBlob(File.ReadAllBytes("image.jpg"), "image/jpeg");
 ```
+
+### Posting
+
+To create a post, use `BlueskyClient.Post_Create()`:
+
+```csharp
+await client.Post_Create(new Post()
+{
+    Text = "Hello, world!",
+    CreatedAt = DateTime.UtcNow,
+
+    // Optional. Only specify if you want to embed an image.
+    Embed = new ImagesEmbed()
+    {
+        Images = new List<EmbeddedImage>()
+        {
+            new EmbeddedImage()
+            {
+                Image = blob, // see "Blobs" section above
+                AltText = "Image description for accessibility"
+            }
+        }
+    }
+});
+```
