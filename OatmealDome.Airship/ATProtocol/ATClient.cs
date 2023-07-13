@@ -22,6 +22,14 @@ public class ATClient
         set;
     }
 
+    static ATClient()
+    {
+        Version version = typeof(ATClient).Assembly.GetName().Version;
+
+        SharedClient.DefaultRequestHeaders.Add("User-Agent",
+            $"Airship/{version.Major}.{version.Minor}.{version.Revision}");
+    }
+
     public ATClient(HttpClient httpClient, string baseUrl)
     {
         _httpClient = httpClient;
