@@ -48,3 +48,11 @@ Once you're done with a session, you should delete it.
 ```
 await client.Server_DeleteSession();
 ```
+
+### Blobs
+
+Media files must be uploaded to the server before they can be used. At the time of writing, the primary Bluesky instance only accepts MIME types that start with `image/`.
+
+```csharp
+GenericBlob blob = await client.Repo_CreateBlob(File.ReadAllBytes("image.jpg"), "image/jpeg");
+```
