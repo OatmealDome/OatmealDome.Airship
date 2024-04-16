@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using DotNext;
 using OatmealDome.Airship.ATProtocol.Lexicon.Request;
+using OatmealDome.Airship.ATProtocol.Lexicon.Types;
 using OatmealDome.Airship.ATProtocol.Lexicon.Types.Blob;
 using OatmealDome.Airship.ATProtocol.Repo;
 using OatmealDome.Airship.ATProtocol.Response;
@@ -198,7 +199,7 @@ public class ATClient
     // Repo
     //
 
-    public async Task<CreateRecordResponse> Repo_CreateRecord<T>(string repo, string collection, T record,
+    public async Task<StrongRef> Repo_CreateRecord<T>(string repo, string collection, T record,
         string? recordKey = null, bool? validate = null, string? swapCommit = null) where T : ATRecord
     {
         CreateRecordRequest<T> request = new CreateRecordRequest<T>()
@@ -213,8 +214,8 @@ public class ATClient
 
         CreateRecordResponse response =
             await SendRequestWithJsonResponse<CreateRecordResponse>(request, ATAuthenticationType.Bearer);
-
-        return response;
+        
+        return new StrongRef(response.Uri, response.Cid);
     }
 
     public async Task<GenericBlob> Repo_CreateBlob(byte[] data, string mimeType)

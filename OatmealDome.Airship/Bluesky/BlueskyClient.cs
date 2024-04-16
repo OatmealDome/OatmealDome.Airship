@@ -1,4 +1,5 @@
 using OatmealDome.Airship.ATProtocol;
+using OatmealDome.Airship.ATProtocol.Lexicon.Types;
 using OatmealDome.Airship.ATProtocol.Repo;
 using OatmealDome.Airship.Bluesky.Feed;
 
@@ -28,7 +29,7 @@ public sealed class BlueskyClient : ATClient
     // Post
     //
     
-    public async Task<CreateRecordResponse> Post_Create(Post post)
+    public async Task<StrongRef> Post_Create(Post post)
     {
         VerifyCredentials();
         
