@@ -24,6 +24,15 @@ public class Post : ATRecord
         get;
         set;
     }
+    
+    [JsonPropertyName("reply")]
+    [JsonConverter(typeof(OptionalConverterFactory))]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public Optional<PostReply> Reply
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("createdAt")]
     [JsonConverter(typeof(DateTimeJsonConverter))]
