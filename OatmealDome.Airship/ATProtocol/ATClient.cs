@@ -244,7 +244,7 @@ public class ATClient
         };
 
         GetRecordResponse<T> response =
-            await SendRequestWithJsonResponse<GetRecordResponse<T>>(request, ATAuthenticationType.Bearer);
+            await SendRequestWithJsonResponse<GetRecordResponse<T>>(request, ATAuthenticationType.None);
 
         return new ATReturnedRecord<T>(response);
     }
