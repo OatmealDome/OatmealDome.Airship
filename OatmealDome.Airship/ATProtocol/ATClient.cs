@@ -45,14 +45,27 @@ public class ATClient
     private async Task<HttpResponseMessage> SendRequestInternal(ATRequest request,
         ATAuthenticationType authenticationType)
     {
-        string url = _baseUrl;
+        StringBuilder urlBuilder = new StringBuilder();
 
-        if (!url.EndsWith('/'))
+        urlBuilder.Append(_baseUrl);
+
+        if (urlBuilder[urlBuilder.Length - 1] != '/')
         {
-            url += '/';
+            urlBuilder.Append('/');
         }
 
-        url += $"xrpc/{request.NamespacedId}";
+        urlBuilder.Append("xrpc/");
+        urlBuilder.Append(request.NamespacedId);
+
+        FormUrlEncodedContent? urlContent = request.CreateFormUrlEncodedContent();
+
+        if (urlContent != null)
+        {
+            urlBuilder.Append('?');
+            urlBuilder.Append(await urlContent.ReadAsStringAsync());
+        }
+
+        string url = urlBuilder.ToString();
 
         HttpRequestMessage requestMessage = new HttpRequestMessage(request.Method, url)
         {

@@ -17,4 +17,6 @@ public abstract class ATRequest
     // public abstract void Validate();
 
     public abstract HttpContent? CreateHttpContent();
+
+    public abstract FormUrlEncodedContent? CreateFormUrlEncodedContent();
 }
