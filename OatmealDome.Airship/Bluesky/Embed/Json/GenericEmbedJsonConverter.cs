@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using OatmealDome.Airship.Bluesky.Embed.Image;
+using OatmealDome.Airship.Bluesky.Embed.Record;
 
 namespace OatmealDome.Airship.Bluesky.Embed.Json;
 
@@ -14,9 +15,20 @@ public class GenericEmbedJsonConverter : JsonConverter<GenericEmbed>
 
         if (document.RootElement.TryGetProperty("$type", out JsonElement typeElement))
         {
-            if (typeElement.GetString() == "app.bsky.embed.images")
+            string type = typeElement.GetString();
+
+            if (type == null)
+            {
+                throw new FormatException("Type is null in embed");
+            }
+            
+            if (type == "app.bsky.embed.images")
             {
                 embed = document.Deserialize<ImagesEmbed>(options)!;
+            }
+            else if (type == "app.bsky.embed.record")
+            {
+                embed = document.Deserialize<RecordEmbed>(options)!;
             }
         }
 
