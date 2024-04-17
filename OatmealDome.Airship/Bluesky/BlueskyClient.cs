@@ -38,8 +38,6 @@ public sealed class BlueskyClient : ATClient
 
     public async Task<ATReturnedRecord<Post>> Post_Get(string did, string recordKey)
     {
-        VerifyCredentials();
-        
         return await Repo_GetRecord<Post>(did, "app.bsky.feed.post", recordKey);
     }
 }
