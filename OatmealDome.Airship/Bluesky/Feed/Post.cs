@@ -33,6 +33,15 @@ public class Post : ATRecord
         get;
         set;
     }
+    
+    [JsonPropertyName("facets")]
+    [JsonConverter(typeof(OptionalConverterFactory))]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public Optional<List<PostFacet>> Facets
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("createdAt")]
     [JsonConverter(typeof(DateTimeJsonConverter))]
