@@ -19,6 +19,11 @@ public class GenericFeatureJsonConverter : JsonConverter<GenericFeature>
             {
                 throw new FormatException("Type is null in feature");
             }
+            
+            if (type == "app.bsky.richtext.facet#link")
+            {
+                feature = document.Deserialize<LinkFeature>(options)!;
+            }
         }
 
         if (feature == null)
