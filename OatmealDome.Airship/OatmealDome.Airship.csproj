@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
 
         <PackageId>OatmealDome.Airship</PackageId>
-        <Version>2.1.0</Version>
+        <Version>2.2.0</Version>
         <Authors>OatmealDome</Authors>
         <Description>Interact with AT Protocol servers.</Description>
         <RepositoryUrl>https://github.com/OatmealDome/OatmealDome.Airship</RepositoryUrl>
