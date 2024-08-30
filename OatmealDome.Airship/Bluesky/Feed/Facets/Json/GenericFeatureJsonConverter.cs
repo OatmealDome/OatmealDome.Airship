@@ -24,6 +24,10 @@ public class GenericFeatureJsonConverter : JsonConverter<GenericFeature>
             {
                 feature = document.Deserialize<LinkFeature>(options)!;
             }
+            else if (type == "app.bsky.richtext.facet#tag")
+            {
+                feature = document.Deserialize<TagFeature>(options)!;
+            }
         }
 
         if (feature == null)
