@@ -102,13 +102,13 @@ Other possible embeds include `RecordEmbed` and `RecordWithMediaEmbed`:
 // Use when you want to quote a post.
 RecordEmbed embedOne = new RecordEmbed()
 {
-    Record = ref // StrongRef
+    Record = postRef // StrongRef
 };
 
 // Use when you want to quote a post, but you also want to attach media to it.
 RecordWithMediaEmbed embedTwo = new RecordWithMediaEmbed()
 {
-    Record = ref,
+    Record = postRef,
     Media = otherEmbed // ImagesEmbed, for example
 };
 ```
