@@ -34,16 +34,19 @@ public class Embed_Tests
 
     private static readonly RecordWithMediaEmbed RecordWithMediaDeserializedObject = new RecordWithMediaEmbed()
     {
-        Record = new StrongRef()
+        RecordEmbed = new RecordEmbed()
         {
-            Uri = "dummy-uri",
-            Cid = "dummy-cid"
+            Record = new StrongRef()
+            {
+                Uri = "dummy-uri",
+                Cid = "dummy-cid"
+            }
         },
-        Media = ImagesDeserializedObject
+        MediaEmbed = ImagesDeserializedObject
     };
 
     private const string RecordWithMediaPreserializedJson =
-        "{\"$type\":\"app.bsky.embed.recordWithMedia\",\"record\":{\"uri\":\"dummy-uri\",\"cid\":\"dummy-cid\"},\"media\":" +
+        "{\"$type\":\"app.bsky.embed.recordWithMedia\",\"record\":{\"$type\":\"app.bsky.embed.record\",\"record\":{\"uri\":\"dummy-uri\",\"cid\":\"dummy-cid\"}},\"media\":" +
         ImagesPreserializedJson + "}";
     
     [Fact]
@@ -101,12 +104,12 @@ public class Embed_Tests
         RecordWithMediaEmbed embed =
             JsonSerializer.Deserialize<RecordWithMediaEmbed>(RecordWithMediaPreserializedJson)!;
 
-        Assert.Equal("dummy-uri", embed.Record.Uri);
-        Assert.Equal("dummy-cid", embed.Record.Cid);
+        Assert.Equal("dummy-uri", embed.RecordEmbed.Record.Uri);
+        Assert.Equal("dummy-cid", embed.RecordEmbed.Record.Cid);
 
-        Assert.IsType<ImagesEmbed>(embed.Media);
+        Assert.IsType<ImagesEmbed>(embed.MediaEmbed);
         
-        ImagesEmbed imagesEmbed = (embed.Media as ImagesEmbed)!;
+        ImagesEmbed imagesEmbed = (embed.MediaEmbed as ImagesEmbed)!;
 
         Assert.Single(imagesEmbed.Images);
 

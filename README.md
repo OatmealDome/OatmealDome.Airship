@@ -108,8 +108,8 @@ RecordEmbed embedOne = new RecordEmbed()
 // Use when you want to quote a post, but you also want to attach media to it.
 RecordWithMediaEmbed embedTwo = new RecordWithMediaEmbed()
 {
-    Record = postRef,
-    Media = otherEmbed // ImagesEmbed, for example
+    RecordEmbed = embedOne,
+    MediaEmbed = otherEmbed // ImagesEmbed, for example
 };
 ```
 

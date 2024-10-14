@@ -17,14 +17,14 @@ public class RecordWithMediaEmbedJsonConverter : JsonConverter<RecordWithMediaEm
 
         return new RecordWithMediaEmbed()
         {
-            Record = recordElement.Deserialize<StrongRef>(options)!,
-            Media = mediaElement.Deserialize<GenericEmbed>(options)!
+            RecordEmbed = recordElement.Deserialize<RecordEmbed>(options)!,
+            MediaEmbed = mediaElement.Deserialize<GenericEmbed>(options)!
         };
     }
 
     public override void Write(Utf8JsonWriter writer, RecordWithMediaEmbed value, JsonSerializerOptions options)
     {
-        if (value.Media is not ImagesEmbed)
+        if (value.MediaEmbed is not ImagesEmbed)
         {
             throw new BlueskyException("Media embed in RecordWithMediaEmbed must be an ImagesEmbed");
         }
@@ -35,10 +35,10 @@ public class RecordWithMediaEmbedJsonConverter : JsonConverter<RecordWithMediaEm
         writer.WriteStringValue("app.bsky.embed.recordWithMedia");
         
         writer.WritePropertyName("record");
-        JsonSerializer.Serialize(writer, value.Record, options);
+        JsonSerializer.Serialize(writer, value.RecordEmbed, options);
         
         writer.WritePropertyName("media");
-        JsonSerializer.Serialize(writer, value.Media, options);
+        JsonSerializer.Serialize(writer, value.MediaEmbed, options);
 
         writer.WriteEndObject();
     }

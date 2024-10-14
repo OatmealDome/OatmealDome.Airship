@@ -8,14 +8,14 @@ namespace OatmealDome.Airship.Bluesky.Embed.Record;
 public class RecordWithMediaEmbed : GenericEmbed
 {
     [JsonPropertyName("record")]
-    public StrongRef Record
+    public RecordEmbed RecordEmbed
     {
         get;
         set;
     }
 
     [JsonPropertyName("media")]
-    public GenericEmbed Media
+    public GenericEmbed MediaEmbed
     {
         get;
         set;
