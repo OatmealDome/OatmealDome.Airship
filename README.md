@@ -6,6 +6,8 @@ This is a .NET 6 library intended for bots that interact with Bluesky or other A
 
 ## Usage
 
+It is recommended that you familiarize yourself with the AT Protocol and other Bluesky-specific concepts before using this library. Refer to the [Bluesky documentation](https://docs.bsky.app/docs/category/advanced-guides) for more detailed information.
+
 At this time, it is only possible to log in and create posts.
 
 First, make a `BlueskyClient` instance:
