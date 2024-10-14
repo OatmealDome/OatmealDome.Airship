@@ -65,6 +65,18 @@ To create a post, use `BlueskyClient.Post_Create()`:
 await client.Post_Create(new Post()
 {
     Text = "Hello, world!",
+    CreatedAt = DateTime.UtcNow
+});
+```
+
+#### Embeds
+
+You can embed things like images into your posts.
+
+```csharp
+await client.Post_Create(new Post()
+{
+    Text = "Hello, world! Here are some images.",
     CreatedAt = DateTime.UtcNow,
 
     // Optional. Only specify if you want to embed an image.
@@ -98,6 +110,8 @@ RecordWithMediaEmbed embedTwo = new RecordWithMediaEmbed()
     Media = otherEmbed // ImagesEmbed, for example
 };
 ```
+
+#### Rich Text
 
 You can also use rich text. Please refer to the [Bluesky documentation](https://docs.bsky.app/docs/advanced-guides/post-richtext) for more information.
 
