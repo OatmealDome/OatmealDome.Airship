@@ -81,3 +81,20 @@ await client.Post_Create(new Post()
     }
 });
 ```
+
+Other possible embeds include `RecordEmbed` and `RecordWithMediaEmbed`:
+
+```csharp
+// Use when you want to quote a post.
+RecordEmbed embedOne = new RecordEmbed()
+{
+    Record = ref // StrongRef
+};
+
+// Use when you want to quote a post, but you also want to attach media to it.
+RecordWithMediaEmbed embedTwo = new RecordWithMediaEmbed()
+{
+    Record = ref,
+    Media = otherEmbed // ImagesEmbed, for example
+};
+```
