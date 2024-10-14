@@ -98,3 +98,47 @@ RecordWithMediaEmbed embedTwo = new RecordWithMediaEmbed()
     Media = otherEmbed // ImagesEmbed, for example
 };
 ```
+
+You can also use rich text. Please refer to the [Bluesky documentation](https://docs.bsky.app/docs/advanced-guides/post-richtext) for more information.
+
+```csharp
+await client.Post_Create(new Post()
+{
+    Text = "Hello, world! Here's a #Hashtag and an example URL: https://example.com",
+    CreatedAt = DateTime.UtcNow,
+
+    Facets = new List<PostFacet>()
+    {
+        new PostFacet()
+        {
+            Index = new FacetRange()
+            {
+                ByteStart = 23,
+                ByteEnd = 31
+            },
+            Features = new List<GenericFeature>()
+            {
+                new TagFeature()
+                {
+                    Tag = "Hashtag"
+                }
+            }
+        },
+        new PostFacet()
+        {
+            Index = new FacetRange()
+            {
+                ByteStart = 52,
+                ByteEnd = 71
+            },
+            Features = new List<GenericFeature>()
+            {
+                new LinkFeature()
+                {
+                    Tag = "https://example.com"
+                }
+            }
+        },
+    }
+});
+```
