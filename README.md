@@ -113,6 +113,42 @@ RecordWithMediaEmbed embedTwo = new RecordWithMediaEmbed()
 };
 ```
 
+#### Replies
+
+You can create a post that is a reply to another post. Replies can be chained together to make a thread of posts.
+
+```csharp
+StrongRef root = await client.Post_Create(new Post()
+{
+    Text = "This is the first post in the thread!",
+    CreatedAt = DateTime.UtcNow
+});
+
+StrongRef childOne = await client.Post_Create(new Post()
+{
+    Text = "This is the second post in the thread!",
+    CreatedAt = DateTime.UtcNow,
+
+    Reply = new PostReply()
+    {
+        Root = root,
+        Parent = root
+    }
+});
+
+StrongRef childTwo = await client.Post_Create(new Post()
+{
+    Text = "This is the third post in the thread!",
+    CreatedAt = DateTime.UtcNow,
+
+    Reply = new PostReply()
+    {
+        Root = root,
+        Parent = childOne
+    }
+});
+```
+
 #### Rich Text
 
 You can also use rich text. Please refer to the [Bluesky documentation](https://docs.bsky.app/docs/advanced-guides/post-richtext) for more information.
