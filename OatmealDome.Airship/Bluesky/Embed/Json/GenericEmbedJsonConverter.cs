@@ -30,6 +30,10 @@ public class GenericEmbedJsonConverter : JsonConverter<GenericEmbed>
             {
                 embed = document.Deserialize<RecordEmbed>(options)!;
             }
+            else if (type == "app.bsky.embed.recordWithMedia")
+            {
+                embed = document.Deserialize<RecordWithMediaEmbed>(options)!;
+            }
         }
 
         if (embed == null)
