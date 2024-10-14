@@ -27,7 +27,7 @@ You can log in by passing your handle and password to `BlueskyClient.Server_Crea
 
 **NOTE**: For security reasons, you should create a dedicated [app password](https://github.com/bluesky-social/atproto-ecosystem/blob/main/app-passwords.md) in Settings -> Advanced -> App Passwords instead of using your account's actual password.
 
-```
+```csharp
 await client.Server_CreateSession("oatmealdome.example.com", "aaaa-bbbb-cccc-dddd");
 ```
 
@@ -37,7 +37,7 @@ After you have been authenticated, you can access the `Credentials` property and
 
 Session tokens are only valid for a couple of hours. You can use the refresh token to get a new session token.
 
-```
+```csharp
 await client.Server_RefreshSession();
 ```
 
@@ -45,7 +45,7 @@ await client.Server_RefreshSession();
 
 Once you're done with a session, you should delete it.
 
-```
+```csharp
 await client.Server_DeleteSession();
 ```
 
