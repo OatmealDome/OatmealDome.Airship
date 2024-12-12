@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using DotNext;
+using OatmealDome.Airship.ATProtocol.Identity;
 using OatmealDome.Airship.ATProtocol.Lexicon.Request;
 using OatmealDome.Airship.ATProtocol.Lexicon.Types;
 using OatmealDome.Airship.ATProtocol.Lexicon.Types.Blob;
@@ -207,6 +208,23 @@ public class ATClient
         await SendRequest(new DeleteSessionRequest(), ATAuthenticationType.Refresh);
 
         Credentials = null;
+    }
+    
+    //
+    // Identity
+    //
+
+    public async Task<string> Identity_ResolveHandle(string handle)
+    {
+        ResolveHandleRequest request = new ResolveHandleRequest()
+        {
+            Handle = handle
+        };
+
+        ResolveHandleResponse response =
+            await SendRequestWithJsonResponse<ResolveHandleResponse>(request, ATAuthenticationType.None);
+
+        return response.Did;
     }
     
     //
