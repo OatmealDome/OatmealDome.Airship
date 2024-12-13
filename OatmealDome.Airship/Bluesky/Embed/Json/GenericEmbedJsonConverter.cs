@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using OatmealDome.Airship.Bluesky.Embed.Image;
 using OatmealDome.Airship.Bluesky.Embed.Record;
+using OatmealDome.Airship.Bluesky.Embed.Video;
 
 namespace OatmealDome.Airship.Bluesky.Embed.Json;
 
@@ -15,7 +16,7 @@ public class GenericEmbedJsonConverter : JsonConverter<GenericEmbed>
 
         if (document.RootElement.TryGetProperty("$type", out JsonElement typeElement))
         {
-            string type = typeElement.GetString();
+            string? type = typeElement.GetString();
 
             if (type == null)
             {
@@ -25,6 +26,10 @@ public class GenericEmbedJsonConverter : JsonConverter<GenericEmbed>
             if (type == "app.bsky.embed.images")
             {
                 embed = document.Deserialize<ImagesEmbed>(options)!;
+            }
+            else if (type == "app.bsky.embed.video")
+            {
+                embed = document.Deserialize<VideoEmbed>(options)!;
             }
             else if (type == "app.bsky.embed.record")
             {
