@@ -89,7 +89,12 @@ await client.Post_Create(new Post()
             new EmbeddedImage()
             {
                 Image = blob, // see "Blobs" section above
-                AltText = "Image description for accessibility"
+                AltText = "Image description for accessibility",
+                AspectRatio = new MediaAspectRatio()
+                {
+                    Width = 1280,
+                    Height = 720
+                }
             }
         }
     }
